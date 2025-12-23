@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Registro de Eventos{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>📋 Registro de Eventos</h2>
+    </div>
+
+    <form method="POST" action="{{ url_for('registrar_evento') }}">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div class="form-group">
+                <label class="form-label">Arete *</label>
+                <select name="arete" class="form-control" required>
+                    <option value="">-- Selecciona un arete --</option>
+                    {% for animal in ganado %}
+                    <option value="{{ animal[0] }}">{{ animal[0] }}{% if animal[1] %} - {{ animal[1] }}{% endif %}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Tipo de Evento *</label>
+                <select name="tipo" class="form-control" required>
+                    <option value="Pesaje">Pesaje</option>
+                    <option value="Vacunación">Vacunación</option>
+                    <option value="Venta">Venta</option>
+                    <option value="Compra">Compra</option>
+                    <option value="Baño">Baño</option>
+                    <option value="Aretado">Aretado</option>
+                    <option value="Desparasitación">Desparasitación</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Fecha *</label>
+                <input type="date" name="fecha" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Peso (kg) - opcional</label>
+                <input type="text" name="peso" class="form-control" placeholder="Ej: 350 o 350.5">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Costo ($) - opcional</label>
+                <input type="text" name="costo" class="form-control" placeholder="Ej: 25000 o 25,000.00">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Notas</label>
+            <textarea name="notas" class="form-control" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">💾 Guardar Evento</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3 class="card-title">ℹ️ Tipos de Eventos</h3>
+    <ul style="line-height: 2;">
+        <li><strong>Pesaje:</strong> Registrar el peso del animal</li>
+        <li><strong>Vacunación:</strong> Registro de vacunas aplicadas</li>
+        <li><strong>Venta:</strong> Registro de venta del animal (incluir monto en costo)</li>
+        <li><strong>Compra:</strong> Registro de compra del animal (incluir monto en costo)</li>
+        <li><strong>Baño:</strong> Tratamiento de baño garrapaticida</li>
+        <li><strong>Desparasitación:</strong> Aplicación de desparasitante</li>
+    </ul>
+</div>
+{% endblock %}

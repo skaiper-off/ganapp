@@ -1,0 +1,78 @@
+<!-- ============ estadisticas.html ============ -->
+{% extends "base.html" %}
+
+{% block title %}Estadísticas{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>📊 Estadísticas Generales</h2>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">🐄</div>
+            <div class="stat-content">
+                <h3>Total de Ganado</h3>
+                <p>{{ stats.total_ganado }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card success">
+            <div class="stat-icon">✅</div>
+            <div class="stat-content">
+                <h3>Ganado Vivo</h3>
+                <p>{{ stats.vivos }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card danger">
+            <div class="stat-icon">❌</div>
+            <div class="stat-content">
+                <h3>Ganado Muerto</h3>
+                <p>{{ stats.muertos }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card success">
+            <div class="stat-icon">👶</div>
+            <div class="stat-content">
+                <h3>Nacimientos Registrados</h3>
+                <p>{{ stats.total_nacimientos }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card danger">
+            <div class="stat-icon">💀</div>
+            <div class="stat-content">
+                <h3>Muertes Registradas</h3>
+                <p>{{ stats.total_muertes }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card warning">
+            <div class="stat-icon">📋</div>
+            <div class="stat-content">
+                <h3>Total de Eventos</h3>
+                <p>{{ stats.total_eventos }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">⚖️</div>
+            <div class="stat-content">
+                <h3>Total de Pesajes</h3>
+                <p>{{ stats.total_pesajes }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">📈</div>
+            <div class="stat-content">
+                <h3>Peso Promedio</h3>
+                <p>{{ stats.promedio_peso }} kg</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

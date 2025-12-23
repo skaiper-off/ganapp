@@ -1,0 +1,43 @@
+<!-- ============ grafica_peso.html ============ -->
+{% extends "base.html" %}
+
+{% block title %}Gráfica de Peso{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>📊 Evolución de Peso</h2>
+    </div>
+
+    <!-- Selector de Arete -->
+    <form method="GET" action="{{ url_for('grafica_peso') }}" class="search-bar">
+        <select name="arete" class="form-control" required>
+            <option value="">-- Selecciona un arete --</option>
+            {% for arete in aretes %}
+            <option value="{{ arete }}" {% if arete == arete_seleccionado %}selected{% endif %}>
+                {{ arete }}
+            </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary">📊 Mostrar Gráfica</button>
+    </form>
+
+    <!-- Gráfica -->
+    {% if grafica %}
+    <div style="margin-top: 2rem; text-align: center;">
+        <img src="data:image/png;base64,{{ grafica }}" 
+             alt="Gráfica de peso" 
+             style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    </div>
+    {% elif arete_seleccionado %}
+    <div style="text-align: center; padding: 3rem; color: var(--dark);">
+        <p style="font-size: 1.2rem;">❌ No hay pesajes registrados para el arete {{ arete_seleccionado }}</p>
+        <p>Registra eventos de tipo "Pesaje" con peso para ver la gráfica de evolución.</p>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 3rem; color: var(--dark);">
+        <p style="font-size: 1.2rem;">👆 Selecciona un arete para ver su evolución de peso</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

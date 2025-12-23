@@ -1,0 +1,63 @@
+<!-- ============ muerte.html ============ -->
+{% extends "base.html" %}
+
+{% block title %}Registrar Muerte{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header" style="background-color: var(--danger);">
+        <h2>💀 Registro de Muerte</h2>
+    </div>
+
+    {% if ganado %}
+    <form method="POST" action="{{ url_for('muerte') }}">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div class="form-group">
+                <label class="form-label">Selecciona el animal que falleció *</label>
+                <select name="arete" class="form-control" required>
+                    <option value="">-- Selecciona un animal --</option>
+                    {% for animal in ganado %}
+                    <option value="{{ animal[0] }}">{{ animal[0] }}{% if animal[1] %} - {{ animal[1] }}{% endif %}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Fecha de Muerte *</label>
+                <input type="date" name="fecha" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Causa de Muerte</label>
+                <select name="causa" class="form-control">
+                    <option value="Enfermedad">Enfermedad</option>
+                    <option value="Accidente">Accidente</option>
+                    <option value="Vejez">Vejez</option>
+                    <option value="Depredador">Depredador</option>
+                    <option value="Desconocida">Desconocida</option>
+                    <option value="Otra">Otra</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Descripción Detallada</label>
+            <textarea name="descripcion" class="form-control" rows="5"></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-danger" 
+                    onclick="return confirm('¿Estás seguro de registrar esta muerte? Esto cambiará el estado del animal a Muerto.');">
+                💀 Registrar Muerte
+            </button>
+            <a href="{{ url_for('listar_ganado') }}" class="btn btn-warning">❌ Cancelar</a>
+        </div>
+    </form>
+    {% else %}
+    <div style="text-align: center; padding: 3rem;">
+        <p style="font-size: 1.2rem; color: var(--danger);">⚠️ No hay ganado vivo registrado</p>
+        <a href="{{ url_for('listar_ganado') }}" class="btn btn-primary">Volver al Listado</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

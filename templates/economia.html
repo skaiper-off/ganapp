@@ -1,0 +1,49 @@
+<!-- ============ economia.html ============ -->
+{% extends "base.html" %}
+
+{% block title %}Resumen Económico{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>💰 Resumen Económico</h2>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card success">
+            <div class="stat-icon">📈</div>
+            <div class="stat-content">
+                <h3>Ingresos (Ventas)</h3>
+                <p style="color: var(--success);">${{ "{:,.2f}".format(ingresos) }} MXN</p>
+            </div>
+        </div>
+
+        <div class="stat-card danger">
+            <div class="stat-icon">📉</div>
+            <div class="stat-content">
+                <h3>Egresos (Gastos)</h3>
+                <p style="color: var(--danger);">${{ "{:,.2f}".format(egresos) }} MXN</p>
+            </div>
+        </div>
+
+        <div class="stat-card {% if balance >= 0 %}success{% else %}danger{% endif %}">
+            <div class="stat-icon">⚖️</div>
+            <div class="stat-content">
+                <h3>Balance Total</h3>
+                <p class="balance-value">
+                    ${{ "{:,.2f}".format(balance) }} MXN
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; padding: 1.5rem; background-color: var(--light); border-radius: 8px;">
+        <h4 style="margin-bottom: 1rem;">ℹ️ Información</h4>
+        <ul style="line-height: 2;">
+            <li><strong>Ingresos:</strong> Suma de todos los eventos tipo "Venta"</li>
+            <li><strong>Egresos:</strong> Suma de eventos tipo "Compra", "Vacunación", "Baño", "Aretado", "Desparasitación"</li>
+            <li><strong>Balance:</strong> Diferencia entre ingresos y egresos</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

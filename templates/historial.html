@@ -1,0 +1,66 @@
+<!-- ============ historial.html ============ -->
+{% extends "base.html" %}
+
+{% block title %}Historial de Eventos{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>📜 Historial de Eventos</h2>
+    </div>
+
+    <!-- Filtro por Arete -->
+    <form method="GET" action="{{ url_for('historial') }}" class="search-bar">
+        <select name="arete" class="form-control">
+            <option value="">-- Ver todos los eventos --</option>
+            {% for arete in aretes %}
+            <option value="{{ arete }}" {% if arete == arete_seleccionado %}selected{% endif %}>
+                {{ arete }}
+            </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary">🔍 Filtrar</button>
+        {% if arete_seleccionado %}
+        <a href="{{ url_for('historial') }}" class="btn btn-warning">Ver Todos</a>
+        {% endif %}
+    </form>
+
+    <!-- Tabla de Eventos -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Arete</th>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Peso (kg)</th>
+                    <th>Costo ($)</th>
+                    <th>Notas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evento in eventos %}
+                <tr>
+                    <td><strong>{{ evento[5] }}</strong></td>
+                    <td>{{ evento[0] }}</td>
+                    <td>{{ evento[1] }}</td>
+                    <td>{{ evento[2] if evento[2] else '-' }}</td>
+                    <td>{{ "${:,.2f}".format(evento[3]) if evento[3] else '-' }}</td>
+                    <td>{{ evento[4] if evento[4] else '-' }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 2rem;">
+                        {% if arete_seleccionado %}
+                            ❌ No hay eventos para el arete {{ arete_seleccionado }}
+                        {% else %}
+                            📭 No hay eventos registrados
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

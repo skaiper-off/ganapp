@@ -1,0 +1,75 @@
+<!-- ============ nacimiento.html ============ -->
+{% extends "base.html" %}
+
+{% block title %}Registrar Nacimiento{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>👶 Registro de Nacimiento</h2>
+    </div>
+
+    <form method="POST" action="{{ url_for('nacimiento') }}">
+        <h3 class="card-title">Información de la Cría</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div class="form-group">
+                <label class="form-label">Número de Arete de la Cría *</label>
+                <input type="text" name="arete_cria" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Nombre de la Cría</label>
+                <input type="text" name="nombre_cria" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Sexo *</label>
+                <select name="sexo" class="form-control" required>
+                    <option value="Macho">Macho</option>
+                    <option value="Hembra">Hembra</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Fecha de Nacimiento *</label>
+                <input type="date" name="fecha" class="form-control" required>
+            </div>
+        </div>
+
+        <h3 class="card-title">Información de Padres</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div class="form-group">
+                <label class="form-label">Arete del Padre</label>
+                <select name="padre" class="form-control">
+                    <option value="No especificado">No especificado</option>
+                    {% for macho in machos %}
+                    <option value="{{ macho[0] }}">{{ macho[0] }}{% if macho[1] %} - {{ macho[1] }}{% endif %}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Arete de la Madre</label>
+                <select name="madre" class="form-control">
+                    <option value="No especificado">No especificado</option>
+                    {% for hembra in hembras %}
+                    <option value="{{ hembra[0] }}">{{ hembra[0] }}{% if hembra[1] %} - {{ hembra[1] }}{% endif %}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Descripción/Observaciones</label>
+            <textarea name="descripcion" class="form-control" rows="4"></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-success">👶 Registrar Nacimiento</button>
+            <a href="{{ url_for('listar_ganado') }}" class="btn btn-warning">❌ Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

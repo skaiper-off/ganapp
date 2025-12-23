@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>🏠 Bienvenido a GanApp</h2>
+    </div>
+    
+    <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+        Sistema integral de gestión ganadera para el control y seguimiento de tu ganado.
+    </p>
+
+    <!-- Estadísticas Rápidas -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">🐄</div>
+            <div class="stat-content">
+                <h3>Total de Ganado</h3>
+                <p>{{ total_ganado }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card success">
+            <div class="stat-icon">✅</div>
+            <div class="stat-content">
+                <h3>Ganado Vivo</h3>
+                <p>{{ ganado_vivo }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card warning">
+            <div class="stat-icon">📋</div>
+            <div class="stat-content">
+                <h3>Total de Eventos</h3>
+                <p>{{ total_eventos }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Acciones Rápidas -->
+    <h3 class="card-title">⚡ Acciones Rápidas</h3>
+    
+    <div class="stats-grid">
+        <a href="{{ url_for('listar_ganado') }}" class="btn btn-primary btn-block">🐄 Gestionar Ganado</a>
+        <a href="{{ url_for('eventos') }}" class="btn btn-primary btn-block">📋 Registrar Evento</a>
+        <a href="{{ url_for('nacimiento') }}" class="btn btn-success btn-block">👶 Registrar Nacimiento</a>
+        <a href="{{ url_for('historial') }}" class="btn btn-primary btn-block">📜 Ver Historial</a>
+        <a href="{{ url_for('estadisticas') }}" class="btn btn-warning btn-block">📊 Ver Estadísticas</a>
+        <a href="{{ url_for('economia') }}" class="btn btn-warning btn-block">💰 Resumen Económico</a>
+    </div>
+</div>
+
+<div class="card">
+    <h3 class="card-title">📖 ¿Cómo usar GanApp?</h3>
+    <ol style="line-height: 2;">
+        <li><strong>Registra tu ganado:</strong> Ve a la sección "Ganado" para añadir tus animales</li>
+        <li><strong>Registra eventos:</strong> Pesajes, vacunaciones, ventas, etc.</li>
+        <li><strong>Registra nacimientos y muertes:</strong> Mantén actualizado el estado de tu hato</li>
+        <li><strong>Consulta reportes:</strong> Revisa estadísticas, gráficas y resumen económico</li>
+        <li><strong>Exporta datos:</strong> Descarga tu información en formato Excel</li>
+    </ol>
+</div>
+{% endblock %}
